@@ -1,0 +1,47 @@
+
+@{
+  Layout = "_Layout";
+}
+
+<div class="container">
+<h1>Here are the list of cities</h1>
+<form action="/cities" method="post">
+<input type="radio" name="order" value="DESC" checked> Descending<br>
+<input type="radio" name="order" value="ASC"> Ascending<br>
+<button class="btn btn-warning" type="submit">Submit</button>
+</form>
+
+<div class="row">
+  <div class="col-md-4">
+    <h4>city</h4>
+<ul>
+  @foreach(var city in @Model)
+  {
+    <li>@city._cityName </li>
+
+  }
+</ul>
+  </div>
+<div class="col-md-4">
+  <h4>City Code</h4>
+<ul>
+  @foreach(var city in @Model)
+  {
+    
+    <li>@city._countyCode </li>
+  }
+</ul>
+</div>
+<div class="col-md-4">
+  <h4>City Population</h4>
+<ul>
+  @foreach(var city in @Model)
+  {
+    
+    <li>@city._cityPopulation </li>
+  }
+</ul>
+</div>
+
+</div>
+</div>
