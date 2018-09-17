@@ -53,7 +53,7 @@ namespace WorldData.Models
         MySqlConnection conn =DB.Connection();
         conn.Open();
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT*FROM city ORDER BY population "+order+";";
+            cmd.CommandText = @"SELECT*FROM city ORDER BY population LIKE "+order+";";
             MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
             while(rdr.Read())
             {
@@ -94,6 +94,29 @@ namespace WorldData.Models
           conn.Open();
           MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
           cmd.CommandText = @"SELECT * FROM country;";
+          MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+          while(rdr.Read())
+          {
+              string countryCode = rdr.GetString(0);
+              string countryName = rdr.GetString(1);
+              //float lifeExpectancy = rdr.GetFloat(7);
+              Country newCountry = new Country(countryCode,countryName);
+              allCountries.Add(newCountry);
+          }
+          conn.Close();
+          if (conn != null)
+          {
+              conn.Dispose();
+          }
+          return allCountries;
+      }
+      public static List<Country> GetCountrySortedBy(string sortedby, string letter)
+      {
+          List<Country> allCountries = new List<Country> {};
+          MySqlConnection conn = DB.Connection();
+          conn.Open();
+          MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+          cmd.CommandText = @"SELECT * FROM country WHERE "+sortedby+" LIKE '"+letter+"%';";
           MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
           while(rdr.Read())
           {

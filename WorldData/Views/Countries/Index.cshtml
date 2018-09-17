@@ -2,6 +2,14 @@
   Layout = "_Layout";
 }
 <div class="container">
+<form action="/countries" method="post">
+<h3>Sort by</h3>
+<input type="radio" name="sortedby" value = "name" checked>&nbsp;Country<br>
+<input type="radio" name="sortedby" value="code">&nbsp;Country Code<br>
+Enter a letter to show countries starting with letter<input type="text" name="letter"><br><br>
+<button type="submit" class="btn btn-info">Submit</button>
+</form>
+
   <h1>Here are the list of countries</h1>
 <div class="row">
   <div class="col-md-6">
@@ -24,7 +32,6 @@
   }
 </ul>
 </div>
-
 </div>
 </div>
 

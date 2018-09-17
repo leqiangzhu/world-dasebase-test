@@ -15,5 +15,13 @@ namespace WorldData.Controllers
       return View(allCountries);
     }
 
+    [HttpPost("/countries")]
+    public ActionResult Sort()
+    {
+      List<Country> allCountries = Country.GetCountrySortedBy(Request.Form["sortedby"],Request.Form["letter"]);
+      return View("Index",allCountries);
+    }
+
+
   }
 }
