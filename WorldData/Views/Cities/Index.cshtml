@@ -11,15 +11,19 @@
 <button class="btn btn-warning" type="submit">Submit</button>
 </form>
 
+
+
+  <h3><a href="/">HOME</a></h3>
+ 
 <div class="row">
   <div class="col-md-4">
     <h4>city</h4>
 <ul>
   @foreach(var city in @Model)
   {
-    <li>@city._cityName </li>
-
+   <li><a href ="cities/@city._cityName">@city._cityName</a> </li>
   }
+
 </ul>
   </div>
 <div class="col-md-4">

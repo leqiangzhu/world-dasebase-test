@@ -22,6 +22,25 @@ namespace WorldData.Controllers
       List<City> allCities = City.GetAllCityByPopulation(newOrder);
       return View("Index", allCities);
     }
+
+    [HttpGet("cities/{cityName}")]
+    public ActionResult Details()
+    {
+      string cityName = Request.Form["city_Name"];
+      List<City> city_Details = City.GetCityDetails(cityName);
+      return View("cities/{cityName}", city_Details);
+    }
+
+    // [HttpPost("cities/{cityName}")]
+    // public ActionResult Details()
+    // {
+    //   string cityName = Request.Form["city_Name"].ToString();
+    //   List<City> city_Details = City.GetCityDetails(cityName);
+    //   return View("cities/{cityName}", city_Details);
+    // }
+
+  
+
   }
 }
 

@@ -27,6 +27,10 @@ namespace WorldData.Models
         conn.Open();
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"SELECT * FROM city ;";
+           // cmd.CommandText = @"SELECT * FROM city WHERE population >5000000;";
+            cmd.CommandText = @"SELECT * FROM city WHERE Name= 'Shanghai' ;";
+
+            
             MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
             while(rdr.Read())
             {
@@ -72,7 +76,37 @@ namespace WorldData.Models
             }
             return allCities;
 
-    }
+        }
+          public static List<City> GetCityDetails(string city_Name)
+        {
+        List<City> allCities=new List<City> {};
+        MySqlConnection conn =DB.Connection();
+        conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM city WHERE Name ="+city_Name+";";
+
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while(rdr.Read())
+            {
+              int cityId = rdr.GetInt32(0);
+              string cityName = rdr.GetString(1);
+              string countyCode=rdr.GetString(2);
+              int cityPopulation = rdr.GetInt32(4);
+             
+              City newCity = new City(cityName,countyCode,cityPopulation,cityId);
+              allCities.Add(newCity);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return allCities;
+
+        }
+
+
+
   }
 
   public class Country
