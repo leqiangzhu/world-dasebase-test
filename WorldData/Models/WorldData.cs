@@ -53,7 +53,7 @@ namespace WorldData.Models
         MySqlConnection conn =DB.Connection();
         conn.Open();
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT*FROM city ORDER BY population LIKE "+order+";";
+            cmd.CommandText = @"SELECT*FROM city ORDER BY population "+order+";";
             MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
             while(rdr.Read())
             {
